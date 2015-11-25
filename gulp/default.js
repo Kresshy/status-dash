@@ -3,8 +3,7 @@ var runSequence = require('run-sequence');
 
 gulp.task('default', function () {
     runSequence(
-        'clean',
-        ['dist-main', 'sass-framework', 'dist-widgets', 'sass-widgets'],
-        'start-server',
-        'watch');
+        'jshint',
+        ['bower:js', 'bower:css', 'sass']
+    );
 });
