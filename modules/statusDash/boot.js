@@ -1,5 +1,3 @@
-'use strict';
-
 var express = require('express');
 var path = require('path');
 
@@ -11,11 +9,13 @@ module.exports['@require'] = [
 ];
 
 function statusBoardModuleBoot(middlewares, routerFactory) {
+    'use strict';
+
     return {
         boot: function () {
             var app = routerFactory.create();
 
-            app.use('/', function(req, res, next) {
+            app.use('/', function (req, res, next) {
                 res.render('index');
             });
 
