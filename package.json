@@ -1,0 +1,55 @@
+{
+  "name": "status-dash",
+  "version": "0.0.1",
+  "description": "Scrum status dashboard",
+  "main": "bin/www",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kresshy/status-dash.git"
+  },
+  "author": "Szabolcs Varadi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kresshy/status-dash/issues"
+  },
+  "homepage": "https://github.com/Kresshy/status-dash#readme",
+  "dependencies": {
+    "async": "^1.5.0",
+    "bluebird": "^3.0.5",
+    "body-parser": "^1.14.1",
+    "bower": "^1.6.5",
+    "chalk": "^1.1.1",
+    "cookie-parser": "^1.4.0",
+    "electrolyte": "^0.2.0",
+    "express": "^4.13.3",
+    "glob": "^6.0.1",
+    "joi": "^7.0.0",
+    "lodash": "^3.10.1",
+    "path": "^0.12.7",
+    "pm2": "^0.15.10",
+    "request-promise": "^1.0.2",
+    "uuid": "^2.0.1",
+    "winston": "^2.1.1"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "gulp": "^3.9.0",
+    "gulp-bower": "0.0.11",
+    "gulp-filter": "^3.0.1",
+    "gulp-inject": "^3.0.0",
+    "gulp-istanbul": "^0.10.2",
+    "gulp-jshint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-sass": "^2.1.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "jshint": "^2.8.0",
+    "main-bower-files": "^2.9.0",
+    "mocha": "^2.3.4",
+    "proxyquire": "^1.7.3",
+    "sinon": "^1.17.2"
+  }
+}

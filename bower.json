@@ -1,0 +1,26 @@
+{
+  "name": "status-dash",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Kresshy/status-dash",
+  "authors": [
+    "Szabolcs Varadi <szabolcs.varadi@logmein.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "angular-gridster": "~0.13.5",
+    "angular-resource": "~1.4.8",
+    "bootstrap-sass": "bootstrap-sass-official#~3.3.5",
+    "font-awesome": "fontawesome#~4.5.0",
+    "jquery": "~2.1.4",
+    "jquery-resize": "*"
+  }
+}
