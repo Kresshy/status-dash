@@ -15,7 +15,7 @@ function statusBoardModuleBoot(middlewares, routerFactory) {
         boot: function () {
             var app = routerFactory.create();
 
-            app.use('/', function (req, res, next) {
+            app.get('/', function (req, res, next) {
                 res.render('index');
             });
 
