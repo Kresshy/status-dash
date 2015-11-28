@@ -1,20 +1,24 @@
 var gulp = require('gulp');
 var mainBowerFiles = require('main-bower-files');
+var streamqueue = require('streamqueue');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var minify = require('gulp-minify-css');
 var filter = require('gulp-filter');
 
+
 gulp.task('bower:js', function () {
-    gulp.src(mainBowerFiles({
-        paths: {
-            bowerDirectory: './public/components',
-            bowerrc: './.bowerrc',
-            bowerJson: './bower.json'
-        }
-    })).pipe(filter('*.js'))
+    streamqueue({objectMode: true},
+        gulp.src('./bower_components/jquery/dist/jquery.js'),
+        gulp.src(mainBowerFiles({
+            paths: {
+                bowerDirectory: './bower_components',
+                bowerrc: './.bowerrc',
+                bowerJson: './bower.json'
+            }
+        }))
+    ).pipe(filter('*.js'))
         .pipe(concat('vendor.js'))
-        //.pipe(uglify())
         .pipe(gulp.dest('./public/scripts/'));
 });
 

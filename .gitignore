@@ -29,7 +29,7 @@ build/Release
 node_modules/
 
 # bower directory
-public/components/
+bower_components/
 
 # Idea files
 .idea/

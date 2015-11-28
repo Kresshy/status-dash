@@ -60,6 +60,7 @@
     "proxyquire": "^1.7.3",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.5",
-    "sinon": "^1.17.2"
+    "sinon": "^1.17.2",
+    "streamqueue": "^1.1.1"
   }
 }

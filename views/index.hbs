@@ -1,1 +1,9 @@
-<h1>Status-Dash App: Index</h1>
+<div ng-controller="dashboardController">
+    <div gridster>
+        <ul>
+            <li gridster-item="item" ng-repeat="item in items">
+              {{item.name}}
+            </li>
+        </ul>
+    </div>
+</div>
