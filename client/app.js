@@ -1,6 +1,7 @@
 angular.module('statusdash', [
     'gridster',
-    'statusdash.dashboard.controller'
+    'statusdash.dashboard.controller',
+    'statusdash.dashboard.directives'
 ]).run(['gridsterConfig', function (gridsterConfig) {
 
     gridsterConfig.columns = 10;
