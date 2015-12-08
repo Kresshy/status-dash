@@ -41,44 +41,35 @@ function teamcityService(requestPromise) {
 
     function pollApiEndpoints() {
         setTimeout(function () {
+            console.log('polling teamcity api endpoints');
             pollProjects().then(function (response) {
                 _projects = response.project;
-                console.log(_projects);
             }).then(pollBuilds).then(function (response) {
                 _builds = response.build;
-                console.log(_builds);
             }).then(pollAgents).then(function (response) {
                 _agents = response.agent;
-                console.log(_agents);
             }).then(pollBuildQueues).then(function (response) {
                 _buildQueues = response.build;
-                console.log(_buildQueues);
-            }).then(function () {
-                pollApiEndpoints();
-            });
+            }).then(pollApiEndpoints);
         }, 1000 * 60);
     }
 
     function pollProjects() {
-        console.log('pollProjects');
         requestOptions.uri = teamcityUrl + projectsEndpoint;
         return requestPromise(requestOptions);
     }
 
     function pollBuilds() {
-        console.log('pollBuilds');
         requestOptions.uri = teamcityUrl + buildsEndpoint;
         return requestPromise(requestOptions);
     }
 
     function pollAgents() {
-        console.log('pollAgents');
         requestOptions.uri = teamcityUrl + agentsEndpoint;
         return requestPromise(requestOptions);
     }
 
     function pollBuildQueues() {
-        console.log('pollBuildQueues');
         requestOptions.uri = teamcityUrl + buildQueuesEndpoint;
         return requestPromise(requestOptions);
     }
