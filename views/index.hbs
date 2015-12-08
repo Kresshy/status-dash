@@ -1,9 +1,9 @@
 <div ng-controller="dashboardController">
     <div gridster>
         <ul>
-            <li gridster-item="item" ng-repeat="item in defaultItems">
-                <widget></widget>
-                \{{item.name}}
+            <li gridster-item="item" ng-repeat="item in items">
+                <text-widget></text-widget>
+                <!--\{{item.name}}-->
             </li>
         </ul>
     </div>

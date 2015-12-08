@@ -1,13 +1,15 @@
 angular.module('statusdash', [
     'gridster',
     'statusdash.dashboard.controller',
-    'statusdash.dashboard.directives'
+    'statusdash.dashboard.service.data',
+    'statusdash.dashboard.service.polling',
+    'statusdash.dashboard.widgets.text.directives'
 ]).run(['gridsterConfig', function (gridsterConfig) {
 
-    gridsterConfig.columns = 10;
+    gridsterConfig.columns = 9;
     gridsterConfig.colWidth = 150;
     gridsterConfig.rowHeight = 150;
-    gridsterConfig.margins = [10, 10];
+    gridsterConfig.margins = [15, 15];
 
     gridsterConfig.draggable = {
         enabled: true, // whether dragging items is supported

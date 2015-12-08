@@ -1,6 +1,6 @@
 angular.module('statusdash.dashboard.controller', [])
     .controller('dashboardController', ['$scope', function ($scope) {
-        $scope.defaultItems = [
+        $scope.items = [
             {name: 'a'},
             {name: 'b'},
             {name: 'c'},

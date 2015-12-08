@@ -34,4 +34,7 @@ bower_components/
 # Idea files
 .idea/
 
+# public directory
+public/
+
 # Created by .ignore support plugin (hsz.mobi)

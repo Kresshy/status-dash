@@ -1,5 +1,5 @@
-angular.module('statusdash.dashboard.directives', [])
-    .directive('widget', function () {
+angular.module('statusdash.dashboard.widgets.text.directives', [])
+    .directive('textWidget', function () {
         return {
             restrict: 'E',
             scope: false,
