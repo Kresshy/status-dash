@@ -6,7 +6,7 @@ module.exports['@singleton'] = true;
 module.exports['@require'] = [
     'express/middlewares/middlewares',
     'express/routerFactory',
-    'statusDash/controllers/teamcityController'
+    'teamcity/controllers/teamcityController'
 ];
 
 function statusBoardModuleBoot(middlewares, routerFactory, teamcityController) {
@@ -17,7 +17,9 @@ function statusBoardModuleBoot(middlewares, routerFactory, teamcityController) {
             var app = routerFactory.create();
 
             app.get('/teamcity/projects', teamcityController.getProjects);
+            app.get('/teamcity/projects/:id', teamcityController.getProjectInformation);
             app.get('/teamcity/builds', teamcityController.getBuilds);
+            app.get('/teamcity/builds/:id', teamcityController.getBuildInformation);
 
             middlewares.use(app);
         }

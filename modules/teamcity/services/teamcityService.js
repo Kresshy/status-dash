@@ -29,47 +29,63 @@ function teamcityService(requestPromise) {
     return {
         init: init,
         getProjects: getProjects,
+        requestProjectInformation: requestProjectInformation,
         getBuilds: getBuilds,
+        requestBuildInformation: requestBuildInformation,
         getAgents: getAgents,
         getBuildQueues: getBuildQueues
     };
 
     function init() {
-        console.log('initialize teamcity service');
+        requestAllEndpoints();
         pollApiEndpoints();
     }
 
     function pollApiEndpoints() {
         setTimeout(function () {
-            console.log('polling teamcity api endpoints');
-            pollProjects().then(function (response) {
-                _projects = response.project;
-            }).then(pollBuilds).then(function (response) {
-                _builds = response.build;
-            }).then(pollAgents).then(function (response) {
-                _agents = response.agent;
-            }).then(pollBuildQueues).then(function (response) {
-                _buildQueues = response.build;
-            }).then(pollApiEndpoints);
-        }, 1000 * 60);
+            requestAllEndpoints().
+                then(pollApiEndpoints);
+        }, 1000 * 60)
     }
 
-    function pollProjects() {
+    function requestAllEndpoints() {
+        return requestProjects().then(function (response) {
+            _projects = response.project;
+        }).then(requestBuilds).then(function (response) {
+            _builds = response.build;
+        }).then(requestAgents).then(function (response) {
+            _agents = response.agent;
+        }).then(requestBuildQueues).then(function (response) {
+            _buildQueues = response.build;
+        });
+    }
+
+    function requestProjects() {
         requestOptions.uri = teamcityUrl + projectsEndpoint;
         return requestPromise(requestOptions);
     }
 
-    function pollBuilds() {
+    function requestProjectInformation(id) {
+        requestOptions.uri = teamcityUrl + projectsEndpoint + "/id:" + id;
+        return requestPromise(requestOptions);
+    }
+
+    function requestBuilds() {
         requestOptions.uri = teamcityUrl + buildsEndpoint;
         return requestPromise(requestOptions);
     }
 
-    function pollAgents() {
+    function requestBuildInformation(id) {
+        requestOptions.uri = teamcityUrl + buildsEndpoint + "/id:" + id;
+        return requestPromise(requestOptions);
+    }
+
+    function requestAgents() {
         requestOptions.uri = teamcityUrl + agentsEndpoint;
         return requestPromise(requestOptions);
     }
 
-    function pollBuildQueues() {
+    function requestBuildQueues() {
         requestOptions.uri = teamcityUrl + buildQueuesEndpoint;
         return requestPromise(requestOptions);
     }
