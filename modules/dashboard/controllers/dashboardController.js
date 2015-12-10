@@ -16,6 +16,9 @@ function dashboardController(dashboardService) {
     }
 
     function getDashboardData(req, res, next) {
-        res.send(dashboardService.getDashboardData());
+        dashboardService.getDashboardData()
+            .then(function (response) {
+                res.send(response);
+            })
     }
 }

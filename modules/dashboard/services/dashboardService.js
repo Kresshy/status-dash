@@ -9,15 +9,21 @@ function dashboardService(teamcityService) {
     var selectedTeamcityBuilds = [];
     var selectedTeamcityProjects = [];
 
-    function mergeSelectedData() {
-        var response = {};
+    return {
+        addTeamcityProject: addTeamcityProject,
+        addTeamcityBuild: addTeamcityBuild,
+        getDashboardData: getDashboardData
+    };
 
-        response.teamcity = {
+    function mergeSelectedDataSources() {
+        var mergedDataSources = {};
+
+        mergedDataSources.teamcity = {
             builds: selectedTeamcityBuilds,
             projects: selectedTeamcityProjects
         };
 
-        return response;
+        return mergedDataSources;
     }
 
     function addTeamcityProject(id) {
@@ -29,6 +35,28 @@ function dashboardService(teamcityService) {
     }
 
     function getDashboardData() {
+        var mergedDataSources = mergeSelectedDataSources();
+
+        var requestedData = {
+            teamcity: {
+                builds: [],
+                projects: []
+            }
+        };
+
+        mergedDataSources.teamcity.projects.forEach(function (item, index) {
+            teamcityService.requestProjectInformation(item)
+                .then(function (response) {
+                    requestedData.teamcity.projects.push(response);
+                });
+        });
+
+        mergedDataSources.teamcity.builds.forEach(function (item, index) {
+            teamcityService.requestBuildsInformation(item)
+                .then(function (response) {
+                    requestedData.teamcity.builds.push(response);
+                })
+        });
 
     }
 }

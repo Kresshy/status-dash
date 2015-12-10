@@ -17,6 +17,7 @@ function statusBoardModuleBoot(middlewares, routerFactory, dashboardController) 
             var app = routerFactory.create();
 
             app.get('/', dashboardController.renderDashboard);
+            app.get('/dashboard/data', dashboardController.getDashboardData);
 
             middlewares.use(app);
         }
