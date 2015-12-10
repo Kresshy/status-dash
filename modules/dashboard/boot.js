@@ -1,6 +1,3 @@
-var express = require('express');
-var path = require('path');
-
 module.exports = statusBoardModuleBoot;
 module.exports['@singleton'] = true;
 module.exports['@require'] = [

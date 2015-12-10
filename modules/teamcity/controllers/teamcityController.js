@@ -9,11 +9,21 @@ function teamcityController(teamcityService) {
     teamcityService.init();
 
     return {
+        getAllInformation: getAllInformation,
         getProjects: getProjects,
         getProjectInformation: getProjectInformation,
         getBuilds: getBuilds,
-        getBuildInformation: getBuildInformation
+        getBuildInformation: getBuildInformation,
+        getAgents: getAgents,
+        getAgentInformation: getAgentInformation
     };
+
+    function getAllInformation(req, res, next) {
+        teamcityService.requestAllEndpoints()
+            .then(function (response) {
+                res.send(response);
+            })
+    }
 
     function getProjects(req, res, next) {
         res.send(teamcityService.getProjects());
@@ -32,6 +42,17 @@ function teamcityController(teamcityService) {
 
     function getBuildInformation(req, res, next) {
         teamcityService.requestBuildInformation(req.params.id)
+            .then(function (response) {
+                res.send(response);
+            })
+    }
+
+    function getAgents(req, res, next) {
+        res.send(teamcityService.getAgents());
+    }
+
+    function getAgentInformation(req, res, next) {
+        teamcityService.requestAgentInformation(req.params.id)
             .then(function (response) {
                 res.send(response);
             })

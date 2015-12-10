@@ -4,8 +4,6 @@ module.exports['@require'] = [
     'request/requestPromise'
 ];
 
-var Promise = require('bluebird');
-
 function teamcityService(requestPromise) {
     var teamcityUrl = "https://teamcity.jetbrains.com/guestAuth/";
     var projectsEndpoint = "app/rest/projects";
@@ -28,11 +26,13 @@ function teamcityService(requestPromise) {
     // exported functions
     return {
         init: init,
+        requestAllEndpoints: requestAllEndpoints,
         getProjects: getProjects,
         requestProjectInformation: requestProjectInformation,
         getBuilds: getBuilds,
         requestBuildInformation: requestBuildInformation,
         getAgents: getAgents,
+        requestAgentInformation: requestAgentInformation,
         getBuildQueues: getBuildQueues
     };
 
@@ -43,8 +43,8 @@ function teamcityService(requestPromise) {
 
     function pollApiEndpoints() {
         setTimeout(function () {
-            requestAllEndpoints().
-                then(pollApiEndpoints);
+            requestAllEndpoints()
+                .then(pollApiEndpoints);
         }, 1000 * 60)
     }
 
@@ -57,6 +57,13 @@ function teamcityService(requestPromise) {
             _agents = response.agent;
         }).then(requestBuildQueues).then(function (response) {
             _buildQueues = response.build;
+        }).then(function () {
+            return {
+                projects: _projects,
+                builds: _builds,
+                agents: _agents,
+                buildQueues: _buildQueues
+            };
         });
     }
 
@@ -82,6 +89,11 @@ function teamcityService(requestPromise) {
 
     function requestAgents() {
         requestOptions.uri = teamcityUrl + agentsEndpoint;
+        return requestPromise(requestOptions);
+    }
+
+    function requestAgentInformation(id) {
+        requestOptions.uri = teamcityUrl + agentsEndpoint + "/id:" + id;
         return requestPromise(requestOptions);
     }
 

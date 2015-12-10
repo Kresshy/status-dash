@@ -1,6 +1,3 @@
-var express = require('express');
-var path = require('path');
-
 module.exports = statusBoardModuleBoot;
 module.exports['@singleton'] = true;
 module.exports['@require'] = [
@@ -16,10 +13,16 @@ function statusBoardModuleBoot(middlewares, routerFactory, teamcityController) {
         boot: function () {
             var app = routerFactory.create();
 
+            app.get('/teamcity/all', teamcityController.getAllInformation);
+
             app.get('/teamcity/projects', teamcityController.getProjects);
             app.get('/teamcity/projects/:id', teamcityController.getProjectInformation);
+
             app.get('/teamcity/builds', teamcityController.getBuilds);
             app.get('/teamcity/builds/:id', teamcityController.getBuildInformation);
+
+            app.get('/teamcity/agents', teamcityController.getAgents);
+            app.get('/teamcity/agents/:id', teamcityController.getAgentInformation);
 
             middlewares.use(app);
         }
