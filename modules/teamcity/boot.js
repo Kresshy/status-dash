@@ -1,4 +1,4 @@
-module.exports = statusBoardModuleBoot;
+module.exports = teamcityModuleBoot;
 module.exports['@singleton'] = true;
 module.exports['@require'] = [
     'express/middlewares/middlewares',
@@ -6,7 +6,7 @@ module.exports['@require'] = [
     'teamcity/controllers/teamcityController'
 ];
 
-function statusBoardModuleBoot(middlewares, routerFactory, teamcityController) {
+function teamcityModuleBoot(middlewares, routerFactory, teamcityController) {
     'use strict';
 
     return {

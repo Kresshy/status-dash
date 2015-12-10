@@ -1,4 +1,4 @@
-module.exports = statusBoardModuleBoot;
+module.exports = dashboardModuleBoot;
 module.exports['@singleton'] = true;
 module.exports['@require'] = [
     'express/middlewares/middlewares',
@@ -6,7 +6,7 @@ module.exports['@require'] = [
     'dashboard/controllers/dashboardController'
 ];
 
-function statusBoardModuleBoot(middlewares, routerFactory, dashboardController) {
+function dashboardModuleBoot(middlewares, routerFactory, dashboardController) {
     'use strict';
 
     return {
