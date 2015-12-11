@@ -14,7 +14,10 @@ function dashboardModuleBoot(middlewares, routerFactory, dashboardController) {
             var app = routerFactory.create();
 
             app.get('/', dashboardController.renderDashboard);
-            app.get('/dashboard/data', dashboardController.getDashboardData);
+
+            app.post('/dashboard/add', dashboardController.addApiEndpoint);
+            app.get('/dashboard/get', dashboardController.getApiEndpoints);
+            app.get('/dashboard/poll', dashboardController.requestApiEndpoints);
 
             middlewares.use(app);
         }

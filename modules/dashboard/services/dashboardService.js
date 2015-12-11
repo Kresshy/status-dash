@@ -1,62 +1,48 @@
 module.exports = dashboardService;
 module.exports['@singleton'] = true;
 module.exports['@require'] = [
-    'teamcity/services/teamcityService'
+    'teamcity/services/teamcityService',
+    'request/requestPromise'
 ];
 
-function dashboardService(teamcityService) {
+var Promise = require('bluebird');
 
-    var selectedTeamcityBuilds = [];
-    var selectedTeamcityProjects = [];
+function dashboardService(teamcityService, requestPromise) {
+
+    var apiEndpoints = [];
 
     return {
-        addTeamcityProject: addTeamcityProject,
-        addTeamcityBuild: addTeamcityBuild,
-        getDashboardData: getDashboardData
+        addApiEndpoint: addApiEndpoint,
+        getApiEndpoints: getApiEndpoints,
+        requestApiEndpoints: requestApiEndpoints
     };
 
-    function mergeSelectedDataSources() {
-        var mergedDataSources = {};
+    function addApiEndpoint(endpoint) {
+        apiEndpoints.push(endpoint);
+    }
 
-        mergedDataSources.teamcity = {
-            builds: selectedTeamcityBuilds,
-            projects: selectedTeamcityProjects
+    function getApiEndpoints() {
+        return apiEndpoints;
+    }
+
+    function requestApiEndpoints() {
+        var promises = [];
+
+        var requestOptions = {
+            headers: {
+                'Accept': 'application/json'
+            },
+            json: true // Automatically parses the JSON string in the response
         };
 
-        return mergedDataSources;
-    }
+        for (var i = 0; i < apiEndpoints.length; i++) {
+            requestOptions.uri = apiEndpoints[i];
+            promises.push(requestPromise(requestOptions));
+        }
 
-    function addTeamcityProject(id) {
-        selectedTeamcityProjects.push(id);
-    }
-
-    function addTeamcityBuild(id) {
-        selectedTeamcityBuilds.push(id);
-    }
-
-    function getDashboardData() {
-        var mergedDataSources = mergeSelectedDataSources();
-
-        var requestedData = {
-            teamcity: {
-                builds: [],
-                projects: []
-            }
-        };
-
-        mergedDataSources.teamcity.projects.forEach(function (item, index) {
-            teamcityService.requestProjectInformation(item)
-                .then(function (response) {
-                    requestedData.teamcity.projects.push(response);
-                });
-        });
-
-        mergedDataSources.teamcity.builds.forEach(function (item, index) {
-            teamcityService.requestBuildsInformation(item)
-                .then(function (response) {
-                    requestedData.teamcity.builds.push(response);
-                })
-        });
-
+        return Promise.all(promises)
+            .then(function (responses) {
+                return responses;
+            });
     }
 }

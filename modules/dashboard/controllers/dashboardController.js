@@ -8,15 +8,26 @@ function dashboardController(dashboardService) {
 
     return {
         renderDashboard: renderDashboard,
-        getDashboardData: getDashboardData
+        addApiEndpoint: addApiEndpoint,
+        getApiEndpoints: getApiEndpoints,
+        requestApiEndpoints: requestApiEndpoints
     };
 
     function renderDashboard(req, res, next) {
         res.render('index');
     }
 
-    function getDashboardData(req, res, next) {
-        dashboardService.getDashboardData()
+    function addApiEndpoint(req, res, next) {
+        dashboardService.addApiEndpoint(req.body.endpoint);
+        res.send('OK');
+    }
+
+    function getApiEndpoints(req, res, next) {
+        res.send(dashboardService.getApiEndpoints());
+    }
+
+    function requestApiEndpoints(req, res, next) {
+        dashboardService.requestApiEndpoints()
             .then(function (response) {
                 res.send(response);
             })
