@@ -22,7 +22,7 @@ function teamcityController(teamcityService) {
         teamcityService.requestAllEndpoints()
             .then(function (response) {
                 res.send(response);
-            })
+            });
     }
 
     function getProjects(req, res, next) {
@@ -44,7 +44,7 @@ function teamcityController(teamcityService) {
         teamcityService.requestBuildInformation(req.params.id)
             .then(function (response) {
                 res.send(response);
-            })
+            });
     }
 
     function getAgents(req, res, next) {
@@ -55,6 +55,6 @@ function teamcityController(teamcityService) {
         teamcityService.requestAgentInformation(req.params.id)
             .then(function (response) {
                 res.send(response);
-            })
+            });
     }
 }

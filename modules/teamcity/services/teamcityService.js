@@ -45,7 +45,7 @@ function teamcityService(requestPromise) {
         setTimeout(function () {
             requestAllEndpoints()
                 .then(pollApiEndpoints);
-        }, 1000 * 60)
+        }, 1000 * 60);
     }
 
     function requestAllEndpoints() {

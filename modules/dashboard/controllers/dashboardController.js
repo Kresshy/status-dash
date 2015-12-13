@@ -30,6 +30,6 @@ function dashboardController(dashboardService) {
         dashboardService.requestApiEndpoints()
             .then(function (response) {
                 res.send(response);
-            })
+            });
     }
 }
