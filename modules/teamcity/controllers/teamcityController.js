@@ -1,5 +1,5 @@
 module.exports = teamcityController;
-module.exports['@signleton'] = true;
+module.exports['@singleton'] = true;
 module.exports['@require'] = [
     'teamcity/services/teamcityService'
 ];
