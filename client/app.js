@@ -1,5 +1,6 @@
 angular.module('statusdash', [
     'gridster',
+    'angularUUID2',
     'statusdash.dashboard.controller',
     'statusdash.dashboard.service.data',
     'statusdash.dashboard.service.polling',

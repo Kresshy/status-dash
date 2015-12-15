@@ -8,28 +8,36 @@ function dashboardController(dashboardService) {
 
     return {
         renderDashboard: renderDashboard,
-        addApiEndpoint: addApiEndpoint,
-        getApiEndpoints: getApiEndpoints,
-        requestApiEndpoints: requestApiEndpoints
+        storeDashboard: storeDashboard,
+        updateDashboard: updateDashboard,
+        loadDashboard: loadDashboard
     };
 
     function renderDashboard(req, res, next) {
         res.render('index');
     }
 
-    function addApiEndpoint(req, res, next) {
-        dashboardService.addApiEndpoint(req.body.endpoint);
-        res.send('OK');
+    function storeDashboard(req, res, next) {
+        dashboardService.storeDashboard(req.body.dashboard)
+            .then(function (dashboard) {
+                res.send(dashboard);
+            }).catch(function (error) {
+                res.status(409);
+                res.send(error);
+            });
     }
 
-    function getApiEndpoints(req, res, next) {
-        res.send(dashboardService.getApiEndpoints());
+    function updateDashboard(req, res, next) {
+        dashboardService.updateDashboard(req.body.dashboard)
+            .then(function (dashboard) {
+                res.send(dashboard);
+            });
     }
 
-    function requestApiEndpoints(req, res, next) {
-        dashboardService.requestApiEndpoints()
-            .then(function (response) {
-                res.send(response);
+    function loadDashboard(req, res, next) {
+        dashboardService.loadDashboard(req.params.id)
+            .then(function (dashboard) {
+                res.send(dashboard);
             });
     }
 }
