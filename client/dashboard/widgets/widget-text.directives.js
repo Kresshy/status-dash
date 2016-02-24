@@ -3,7 +3,7 @@ angular.module('statusdash.dashboard.widgets.text.directives', [])
         return {
             restrict: 'E',
             scope: false,
-            template: '<span>{{item.name}}</span>',
+            template: '<span>{{item.id}}</span>',
             link: function ($scope, element, attr) {
 
             }
