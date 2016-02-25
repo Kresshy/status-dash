@@ -9,40 +9,29 @@ var Promise = require('bluebird');
 
 function dashboardService(teamcityService, requestPromise) {
 
-    var apiEndpoints = [];
+    var dashboards = {};
 
     return {
-        addApiEndpoint: addApiEndpoint,
-        getApiEndpoints: getApiEndpoints,
-        requestApiEndpoints: requestApiEndpoints
+        storeDashboard: storeDashboard,
+        updateDashboard: updateDashboard,
+        loadDashboard: loadDashboard
     };
 
-    function addApiEndpoint(endpoint) {
-        apiEndpoints.push(endpoint);
-    }
-
-    function getApiEndpoints() {
-        return apiEndpoints;
-    }
-
-    function requestApiEndpoints() {
-        var promises = [];
-
-        var requestOptions = {
-            headers: {
-                'Accept': 'application/json'
-            },
-            json: true // Automatically parses the JSON string in the response
-        };
-
-        for (var i = 0; i < apiEndpoints.length; i++) {
-            requestOptions.uri = apiEndpoints[i];
-            promises.push(requestPromise(requestOptions));
-        }
-
-        return Promise.all(promises)
-            .then(function (responses) {
-                return responses;
+    function storeDashboard(dashboard) {
+        if (!dashboards[dashboard.id]) {
+            return Promise.resolve(dashboards[dashboard.id] = dashboard);
+        } else {
+            return Promise.reject({
+                message: 'Dashboard already exists'
             });
+        }
+    }
+
+    function updateDashboard(dashboard) {
+        return Promise.resolve(dashboards[dashboard.id] = dashboard);
+    }
+
+    function loadDashboard(id) {
+        return Promise.resolve(dashboards[id]);
     }
 }

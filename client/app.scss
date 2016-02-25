@@ -1,5 +1,29 @@
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+
+.gridster-item {
+    padding: 0;
+
+    .text-widget {
+        height: 100%;
+        border-radius: 5px;
+    }
+
+    h3 {
+        margin: 0;
+    }
+
+    .has-error {
+        background-color: red;
+    }
+
+    .finished {
+        background-color: green;
+    }
+}
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -14,3 +38,4 @@ body {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
+

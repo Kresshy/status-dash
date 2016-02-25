@@ -12,9 +12,15 @@ angular.module('statusdash.dashboard.controller', ['ui.bootstrap'])
             }
 
             for (var i = 0; i < $scope.items.length; i++) {
+
+                //if (i < 8) {
+                //    $scope.items[i].col = 1;
+                //}
+
                 for (var j = 0; j < data.length; j++) {
                     if ($scope.items[i].id == data[j].id) {
-                        $scope.items[i].id = data[j].id + ' refreshed';
+                        $scope.items[i].id = data[j].id;
+                        $scope.items[i].status = data[j].status;
                     }
                 }
             }
